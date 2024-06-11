@@ -1,12 +1,32 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/praneethbongi007/Jenkins-Zero-To-Hero'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Add build steps here, for example:
+                sh 'echo "Building the project..."'
+                // sh 'mvn clean install' (if using Maven)
+                // sh './gradlew build' (if using Gradle)
+            }
+        }
+        stage('Test') {
+            steps {
+                // Add test steps here, for example:
+                sh 'echo "Running tests..."'
+                // sh 'mvn test' (if using Maven)
+                // sh './gradlew test' (if using Gradle)
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Add deploy steps here, if any
+                sh 'echo "Deploying the project..."'
+            }
+        }
     }
-  }
 }
